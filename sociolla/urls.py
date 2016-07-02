@@ -16,6 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from makeup.views import autocomplete_view, product_detail, HomePageView
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^autocomplete/', autocomplete_view, name='autocomplete-view'),
+    url(r'^product', product_detail, name='product-detail'),
+    url(r'^$', HomePageView.as_view(), name='index-view'),
 ]
