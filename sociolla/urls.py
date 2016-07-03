@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 from makeup.views import autocomplete_view, product_detail, HomePageView
 
@@ -23,4 +24,5 @@ urlpatterns = [
     url(r'^autocomplete/', autocomplete_view, name='autocomplete-view'),
     url(r'^product', product_detail, name='product-detail'),
     url(r'^$', HomePageView.as_view(), name='index-view'),
+    url(r'^home/$', TemplateView.as_view(template_name="sociolla/index.html")),
 ]
