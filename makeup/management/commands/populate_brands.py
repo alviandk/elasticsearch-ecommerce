@@ -28,4 +28,5 @@ class Command(BaseCommand):
                 brand = Brand.objects.get(slug=slug)
             except:
                 brand = Brand.objects.create(name=row['name'])
-                brand.save()
+            brand.link = row['link']
+            brand.save()
