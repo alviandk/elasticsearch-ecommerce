@@ -1,12 +1,14 @@
-from __future__ import unicode_literals
+import django.db.models.options as options
 
 from django.db import models
-from django.template.defaultfilters import slugify
+from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 import django.db.models.options as options
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + (
     'es_index_name', 'es_type_name', 'es_mapping'
 )
+es_client = settings.ES_CLIENT
 
 # Create your models here.
 class Category(models.Model):

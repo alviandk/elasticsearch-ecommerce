@@ -23,6 +23,8 @@ def autocomplete_view(request):
         }
     )
     options = resp['name_complete'][0]['options']
+    print query
+    print options
     data = json.dumps(
         [{'id': i['payload']['pk'], 'value': i['text']} for i in options]
     )
