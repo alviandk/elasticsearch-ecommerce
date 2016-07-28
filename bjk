@@ -1,0 +1,84 @@
+curl -XPUT "http://localhost:9200/django " -d'
+{
+   "settings": {
+      "analysis": {
+         "filter": {
+            "nGram_filter": {
+               "type": "nGram",
+               "min_gram": 2,
+               "max_gram": 20,
+               "token_chars": [
+                  "letter",
+                  "digit",
+                  "punctuation",
+                  "symbol"
+               ]
+            }
+         },
+         "analyzer": {
+            "nGram_analyzer": {
+               "type": "custom",
+               "tokenizer": "whitespace",
+               "filter": [
+                  "lowercase",
+                  "asciifolding",
+                  "nGram_filter"
+               ]
+            },
+            "whitespace_analyzer": {
+               "type": "custom",
+               "tokenizer": "whitespace",
+               "filter": [
+                  "lowercase",
+                  "asciifolding"
+               ]
+            }
+         }
+      }
+   },
+   "mappings": {
+     "product": {
+        "_all": {
+           "analyzer": "nGram_analyzer",
+           "search_analyzer": "whitespace_analyzer"
+        },
+        "properties": {
+                'category': {
+                    'type': 'object',
+                    'properties': {
+                        'name': {'type': 'string', 'index': 'not_analyzed'},
+                    }
+                },
+                'brand': {
+                    'type': 'object',
+                    'properties': {
+                        'name': {'type': 'string', 'index': 'not_analyzed'},
+                    }
+                },
+                'name': {'type': 'string', 'index': 'not_analyzed'},
+                'price': {'type': 'long'},
+                'description': {'type': 'string'},
+
+        }
+     }
+  }
+}'
+
+search
+{
+    'query':{
+            "more_like_this" : {
+                "fields" : ["brand.name", "category.name"],
+                "like" : [
+                {
+                    "_index" : "django",
+                    "_type" : "product",
+                    "_id" : "478"
+                },
+
+                ],
+                "min_term_freq" : 1,
+                "max_query_terms" : 12
+            }
+    }
+}

@@ -1,4 +1,5 @@
 import json
+import requests
 from urllib import urlencode
 from copy import deepcopy
 from django.http import HttpResponse
@@ -11,23 +12,28 @@ client = settings.ES_CLIENT
 
 def autocomplete_view(request):
     query = request.GET.get('term', '')
-    resp = client.suggest(
-        index='django',
-        body={
-            'name_complete': {
-                "text": query,
-                "completion": {
-                    "field": 'name_complete',
-                }
+
+    data = {
+               "size": 5,
+               "query": {
+                  "match": {
+                     "_all": {
+                        "query": query,
+                        "operator": "and",
+                        "fuzziness" : 2,
+                     }
+                  }
+               }
             }
-        }
-    )
-    options = resp['name_complete'][0]['options']
+    resp = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
+    print resp.content
+    #options = resp['name_complete'][0]['options']
     print query
-    print options
-    data = json.dumps(
-        [{'id': i['payload']['pk'], 'value': i['text']} for i in options]
-    )
+    #print options
+
+    #data = json.dumps(
+    #    [{'id': i['payload']['pk'], 'value': i['text']} for i in options]
+    #)
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 

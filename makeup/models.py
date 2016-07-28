@@ -47,11 +47,12 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
-'''
+
     def save(self, *args, **kwargs):
         if self.id is None:
             self.slug = slugify(self.name)
         self.slug = slugify(self.name)
+'''
         super(Brand, self).save(*args, **kwargs)
         for product in self.product_brand.all():
             data = product.field_es_repr('brand')

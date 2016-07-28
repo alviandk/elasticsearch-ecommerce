@@ -11,13 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        #define basic parameters
-        total_records = 0
-        updated_records = 0
-        created_records = 0
-
         filename = args[0]
-        delimiter = options.get('delimiter',',')
 
         csv_file = open(filename, 'rU')
         csv_reader = csv.DictReader(csv_file)

@@ -13,9 +13,9 @@ class Command(BaseCommand):
         index_name = Product._meta.es_index_name
         if indices_client.exists(index_name):
             indices_client.delete(index=index_name)
-        indices_client.create(index=index_name)
-        indices_client.put_mapping(
-            doc_type=Product._meta.es_type_name,
-            body=Product._meta.es_mapping,
-            index=index_name
-        )
+        #indices_client.create(index=index_name)
+        #indices_client.put_mapping(
+        #    doc_type=Product._meta.es_type_name,
+        #    body=Product._meta.es_mapping,
+        #    index=index_name
+        #)
