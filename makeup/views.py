@@ -20,20 +20,21 @@ def autocomplete_view(request):
                      "_all": {
                         "query": query,
                         "operator": "and",
-                        "fuzziness" : 2,
+                        
                      }
                   }
                }
             }
     resp = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
-    print resp.content
+    resp = json.loads(resp.content)
+    options = resp['hits']['hits']
     #options = resp['name_complete'][0]['options']
-    print query
+    #print query
     #print options
 
-    #data = json.dumps(
-    #    [{'id': i['payload']['pk'], 'value': i['text']} for i in options]
-    #)
+    data = json.dumps(
+        [{'id': i['_id'], 'value': '{} | {} | {}'.format(i['_source']['name'], i['_source']['brand']['name'], i['_source']['category']['name'])} for i in options]
+    )
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 
