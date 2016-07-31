@@ -99,7 +99,7 @@ h5,
     margin: 0px 8px;
 }
 .ie8 .top-menu > ul > li:after{
-   
+
     margin: 0px 2px;
 }
 .top-row .logo {
@@ -236,7 +236,7 @@ h5,
     margin-bottom:35px;
 }
 .flex-caption .cusmo-btn{
-    padding: 15px 40px !important; 
+    padding: 15px 40px !important;
 }
 .cusmo-btn{
      font-family: "Raleway"!important;
@@ -261,10 +261,10 @@ h5,
     background-image: none!important;
 }
 .cusmo-btn:focus{
-    text-decoration: none; 
+    text-decoration: none;
     background-color: #333!important;
     background-image: none!important;
-    
+
 }
 .add-to-wishlist-btn{
     color:#70543f;
@@ -273,7 +273,7 @@ h5,
     display: none;
 }
 .section-home-products .products-holder .product-item:after{
-   right: -24px;  
+   right: -24px;
 }
 .products-holder .product-item:after{
     content: "";
@@ -382,7 +382,7 @@ h5,
 }
 .client-item{
     display: inline-block;
-  
+
 }
 .section-carousel {
 margin: 70px 0 -27px;
@@ -391,7 +391,7 @@ margin: 70px 0 -27px;
     text-align: center;
     margin: 40px 0 30px 0;
     border-bottom: 4px solid #ed4559;
- 
+
     padding-bottom: 20px;
 }
 .nav-holder{
@@ -406,16 +406,16 @@ margin: 70px 0 -27px;
 
 .nav-holder .carousel_prev{
     left: 0;
-    
+
 }
 .nav-holder .carousel_next{
     right: 0;
-    
+
 }
 .carousel-holder{
    width: 90%!important;
 margin-left: auto!important;
-margin-right: auto!important; 
+margin-right: auto!important;
 }
 .caroufredsel_wrapper {
 
@@ -443,7 +443,7 @@ margin-right: auto!important;
     display: none;
 }
 .ie8 .tab-content{
-  overflow: hidden;  
+  overflow: hidden;
 }
 .controls-holder li:hover:after,
 .controls-holder li.active:after
@@ -525,7 +525,7 @@ margin-right: auto!important;
     font-size: 18px;
     left: 26px;
     position: absolute;
-    top: 10px;
+    top: 65px;
 }
 .email-holder{
     position: relative;
@@ -707,7 +707,7 @@ display: inline-block;
 }
 
 .webkit .basket{
-   top: 17px; 
+   top: 17px;
 }
 .basket {
    display: inline-block;
@@ -783,7 +783,7 @@ min-width: 70px!important;
 }
 .basket .dropdown-menu li{
     line-height:  10px;
-    
+
     margin: 17px 0;
 }
 .basket-item{
@@ -791,7 +791,7 @@ min-width: 70px!important;
     position: relative;
     padding-bottom: 17px;
     border-bottom: 1px solid #E2E4D9;
-  
+
 }
 
 .basket-item .thumb{
@@ -907,7 +907,7 @@ min-width: 70px!important;
 .breadcrumb-holder  .bcrumb  li:after{
     content:"/";
     color:#e3e6db;
-    margin: 0px 5px;  
+    margin: 0px 5px;
 }
 .accordion-widget .accordion-toggle:hover{
     color:#ed4559;
@@ -944,9 +944,9 @@ min-width: 70px!important;
     margin-bottom: 12px;
 }
 .gecko .accordion-widget .accordion-toggle:before {
- 
+
     left: 2px;
-   
+
     top: -3px;
 }
 .accordion-widget .accordion-toggle:before{
@@ -1190,12 +1190,12 @@ margin: 12px 0 0 -22px;
 width: 375px;
 }
 .flex-control-thumbs li {
-    width: 70px; 
+    width: 70px;
     float: left;
     margin: 0px 5px 0 0;
-        
+
 }
-        
+
 .product-info-box .star-holder strong {
 float: left;
 margin-right: 11px;
@@ -1283,8 +1283,8 @@ margin-right: 23px;
 }
 
 .product-tabs  .controls-holder {
-   
-   
+
+
     border-bottom: 4px solid #E1E4D9;
 
     padding-bottom: 20px;
@@ -1414,7 +1414,7 @@ text-transform: uppercase;
 margin-bottom: -45px;
 }
 .gecko .chosen-container.chosen-with-drop .chosen-drop,.ie .chosen-container.chosen-with-drop .chosen-drop {
- 
+
     margin-top: -7px;
 }
 .shopping-cart-page thead{
@@ -1462,7 +1462,7 @@ margin: 22px 0 0 7px;
 }
 .shopping-cart-page th,.shopping-cart-page td{
    padding-left:  0;
-padding-right:  0; 
+padding-right:  0;
 }
 .shopping-cart-page .thumb {
 height: 120px;
@@ -1541,7 +1541,7 @@ box-shadow: 0px 1px #ed4559!important;
 outline: none!important;
 }
 .cusmo-input {
-   
+
 border: 1px solid #D5D5D5!important;
 box-shadow: 0px 1px #D5D5D5!important;
 border-radius: 30px!important;
@@ -1571,7 +1571,7 @@ vertical-align: middle;
 }
 .forget-password a:hover{
     color:#000;
-   
+
 }
 .form-holder .button-holder{
     margin-top: 16px;
@@ -1585,7 +1585,7 @@ margin-bottom: 37px;
 }
 .section-checkout{
     position: relative;
-        
+
 }
 .right-border:after{
     position: absolute;
@@ -1696,7 +1696,7 @@ font-size: 12px;
 font-style: italic;
 }
 .invoice .row-price{
-  margin-top: 10px;  
+  margin-top: 10px;
 }
 .invoice .desc .tag-line {
 font-style: italic;
@@ -1764,9 +1764,9 @@ margin: 20px 0 0;
        width: 100%;
 }
 .map-holder {
-   
+
   background-color: #ffffff;
- 
+
 }
 .section-contact {
 margin-top: 43px;
@@ -1816,7 +1816,7 @@ margin-top: 2px;
     font-size: 9px;
     color:#fff;
     border-radius: 100px;
-   
+
     right: 10px;
     top:1px;
    width: 25px;

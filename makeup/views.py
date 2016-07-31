@@ -41,7 +41,7 @@ def autocomplete_view(request):
 def product_detail(request):
     product_id = request.GET.get('product_id')
     product = Product.objects.get(pk=product_id)
-    return render(request, 'product-details.html', context={'product': product})
+    return render(request, 'sociolla/product-details.html', context={'product': product})
 
 class HomePageView(TemplateView):
     template_name = "index.html"
