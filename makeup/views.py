@@ -20,7 +20,7 @@ def autocomplete_view(request):
                      "_all": {
                         "query": query,
                         "operator": "and",
-                        
+                        "fuzziness": 1
                      }
                   }
                }
