@@ -123,6 +123,8 @@ USE_I18N = True
 
 USE_L10N = True
 
+USE_THOUSAND_SEPARATOR = True
+
 USE_TZ = True
 
 
@@ -160,3 +162,5 @@ ES_CLIENT = Elasticsearch(
     ['http://127.0.0.1:9200/'],
     connection_class=RequestsHttpConnection
 )
+
+ES_URL = 'http://127.0.0.1:9200/django'

@@ -20,7 +20,8 @@ def autocomplete_view(request):
                      "_all": {
                         "query": query,
                         "operator": "and",
-                        "fuzziness": 1
+                        "fuzziness": 1,
+                        "analyzer": "filter_synonyms"
                      }
                   }
                }
@@ -33,7 +34,10 @@ def autocomplete_view(request):
     #print options
 
     data = json.dumps(
-        [{'id': i['_id'], 'value': '{} | {} | {}'.format(i['_source']['name'], i['_source']['brand']['name'], i['_source']['category']['name'])} for i in options]
+        [{'id': i['_id'],
+          'value': '{} | in brand {} | in category {}'.format(i['_source']['name'],
+                                                              i['_source']['brand']['name'],
+                                                              i['_source']['category']['name'])} for i in options]
     )
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
@@ -42,6 +46,13 @@ def product_detail(request):
     product_id = request.GET.get('product_id')
     product = Product.objects.get(pk=product_id)
     return render(request, 'sociolla/product-details.html', context={'product': product})
+
+
+def search_result(request):
+    product_id = request.GET.get('product_id')
+    product = Product.objects.get(pk=product_id)
+    return render(request, 'sociolla/product-details.html', context={'product': product})
+
 
 class HomePageView(TemplateView):
     template_name = "index.html"

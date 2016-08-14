@@ -23,6 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^autocomplete/', autocomplete_view, name='autocomplete-view'),
     url(r'^product', product_detail, name='product-detail'),
-    url(r'^$', HomePageView.as_view(), name='index-view'),
-    url(r'^home/$', TemplateView.as_view(template_name="sociolla/index.html")),
+    #url(r'^$', HomePageView.as_view(), name='index-view'),
+    url(r'^$', TemplateView.as_view(template_name="sociolla/index.html")),
 ]

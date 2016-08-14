@@ -13,6 +13,11 @@ curl -XPUT "http://localhost:9200/django " -d'
                   "punctuation",
                   "symbol"
                ]
+            },
+            "synonyms_filt" : {
+              "tokenizer": "keyword",
+                "type" : "synonym",
+                "synonyms_path" : "synonim.txt"
             }
          },
          "analyzer": {
@@ -22,7 +27,8 @@ curl -XPUT "http://localhost:9200/django " -d'
                "filter": [
                   "lowercase",
                   "asciifolding",
-                  "nGram_filter"
+                  "nGram_filter",
+                  "synonyms_filt"
                ]
             },
             "whitespace_analyzer": {
@@ -32,6 +38,12 @@ curl -XPUT "http://localhost:9200/django " -d'
                   "lowercase",
                   "asciifolding"
                ]
+            },
+            "filter_synonyms": {
+                "filter": [
+                  "synonyms_filt"
+                ],
+                "tokenizer": "keyword"
             }
          }
       }
@@ -64,6 +76,9 @@ curl -XPUT "http://localhost:9200/django " -d'
   }
 }'
 
+settings
+
+
 search
 {
     'query':{
@@ -82,3 +97,25 @@ search
             }
     }
 }
+
+filter sinonim
+
+"filter" : {
+              "synonyms_filt" : {
+                "tokenizer": "keyword",
+                  "type" : "synonym",
+                  "synonyms_path" : "analysis/synonym.txt"
+              }
+          }
+      }
+  }
+
+  analyzer sinonim
+  "analyzer": {
+             "filter_synonyms": {
+                 "filter": [
+                   "synonyms_filt"
+                 ],
+                 "tokenizer": "keyword"
+             }
+       }

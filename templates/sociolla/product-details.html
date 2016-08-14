@@ -25,10 +25,33 @@
 
         <![endif]-->
 
-        
+
          <link  rel="stylesheet" href="{% static 'css/style.css' %}">
          <link  rel="stylesheet" href="{% static 'css/responsive.css' %}">
+         <link rel="stylesheet" href="{% static "jquery-ui.css" %}" type="text/css" media="all" />
 
+         <script src="{% static "jquery.min.js" %}" type="text/javascript"></script>
+         <script src="{% static "jquery-ui.min.js" %}" type="text/javascript"></script>
+         <script type="text/javascript">
+         $(function() {
+           $("#search").autocomplete({
+             source: "{% url 'autocomplete-view' %}",
+             minLength: 1,
+             select: function(event, ui) {
+               window.location.href = "{% url 'product-detail' %}" + "?product_id=" + ui.item.id;
+             },
+             open: function(event, ui) {
+                 $(".ui-autocomplete").css("z-index", 1000);
+             }
+           });
+         });
+         </script>
+
+         <script type="text/javascript">
+         $(document).ready(function(){
+             $('[data-toggle="tooltip"]').tooltip();
+         });
+         </script>
 
     </head>
     <body>
@@ -46,7 +69,7 @@
                                     <img alt="" src="{% static "images/logo.png"%}" />
                                 </span>
                                 <span class="text" style="top: 40px;">
-                                    <a href="index.html">Maquill<span>age</span></a>
+                                    <a href="/">Maquill<span>age</span></a>
                                 </span>
                             </div>
 						</div>
@@ -56,63 +79,10 @@
                 <div class="top-categories">
                     <div class="container">
                         <div class="row-fluid">
-                            <div class="span9">
-                                <ul class="inline top-cat-menu" style="margin-top: 15px;">
-                                    <li>
-                                        <a href="products-grid.html">face</a>
-                                    </li>
-                                    <li><a href="products-grid.html">body</a></li>
-                                    <li><a href="products-grid.html">make up</a></li>
-
-
-                                    <li><a href="products-grid.html">hairs</a></li>
-                                    <li><a href="products-grid.html">perfumes</a></li>
-                                    <li><a href="products-grid.html">gifts</a></li>
-                                    <li><a href="products-grid.html">brands</a></li>
-                                    <li><a href="products-grid.html">must have</a></li>
-
-                                </ul>
-
-
-                                <select class="top-cat-menu dropdown">
-                                <option value="products-grid.html">
-                                   FACE
-                                </option>
-
-
-                                 <option value="products-grid.html">
-                                   BODY
-                                </option>
-                                 <option value="products-grid.html">
-                                   MAKE UP
-                                </option>
-                                 <option value="products-grid.html">
-                                   HAIRS
-                                </option>
-                                 <option value="products-grid.html">
-                                   PERFUMES
-                                </option>
-                                 <option value="products-grid.html">
-                                   GIFTS
-                                </option>
-                                 <option value="products-grid.html">
-                                   BRANDS
-                                </option>
-
-                                 <option value="products-grid.html">
-                                   MUST HAVE
-                                </option>
-
-
-
-                            </select>
-
-
-                            </div>
-                            <div class="span3">
+                            <div class="span12">
                                 <div class="search-field-holder">
                                     <form>
-                                        <input class="span12" type="text" placeholder="Type and hit enter" style="height: 46px;">
+                                        <input id="search" class="span12" type="text" placeholder="Type and hit enter" style="height: 46px;">
                                         <i class="icon-search"></i>
                                     </form>
                                 </div>
@@ -120,26 +90,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="breadcrumb-holder">
-                    <div class="container">
-                        <ul class="inline bcrumb">
-                            <li>
-                                <a href="index.html">home</a>
-                            </li>
-                            <li>face</li>
-                            <li class="active">all products</li>
-
-
-                        </ul>
-
-                        <div class="grid-list-buttons">
-
-                        </div>
-                    </div>
-                </div>
-
   </section>
 
 
@@ -159,7 +109,7 @@
 
                                 </div>
 
-                                <hr>
+
 
                                 <div class="accordion-widget filter-accordions">
 
@@ -188,20 +138,14 @@
                                     </div>
                                     <div class="span5">
                                         <div class="product-info-box">
-                                            <div class="star-holder">
-                                                <strong>Rating</strong>
-                                                <div class="star" data-score="3"></div>
-
-                                                <div class="review-counter">
-                                                    2 reviews
-
-                                                </div>
-                                            </div>
-                                            <hr>
                                             <div class="info-holder">
                                                 <h4>Product ID: {{ product.pk }}</h4>
                                                 <p>
-                                                    {{ product.description }}
+                                                    {% if product.description %}
+                                                      {{ product.description }}
+                                                    {% else %}
+                                                      No description for this product.
+                                                    {% endif %}
                                                 </p>
                                             </div>
                                             <hr>
@@ -209,14 +153,9 @@
                                             <hr>
                                             <div class="price-holder">
                                                 <div class="price">
-                                                    <span>{{ product.price }}</span>
+                                                    <span>Rp {{ product.price }}</span>
 
                                                 </div>
-                                            </div>
-                                            <div class="buttons-holder">
-                                                <a class="cusmo-btn add-button" href="#">add to cart</a>
-
-                                                <a class="add-to-wishlist-btn" href="#"><i class="icon-plus"></i> Add to wishlist</a>
                                             </div>
                                         </div>
 
@@ -229,58 +168,6 @@
 
 
                                 </div>
-
-                                 <div class="middle-header-holder">
-                                <div class="middle-header">you may also like</div>
-                                </div>
-                                 <div class="products-holder related-products">
-                                <div class="row-fluid">
-                                    <div class="span4">
-                                        <div class="product-item">
-
-                                            <img alt="" src="images/p1.jpg" />
-                                            <h1>versace</h1>
-                                            <div class="tag-line">
-                                                <span>yellow diamond</span>
-                                                <span>toilet water spray</span>
-                                            </div>
-                                            <div class="price">
-                                                $270.00
-                                            </div>
-                                            <a class="cusmo-btn add-button" href="#">add to cart</a>
-
-                                        </div>
-                                    </div>
-                                    <div class="span4">
-                                        <div class="product-item">
-                                            <img alt="" src="images/p2.jpg" />
-                                            <h1>estee lauder</h1>
-                                            <div class="tag-line">
-                                                <span>yellow diamond</span>
-                                                <span>toilet water spray</span>
-                                            </div>
-                                            <div class="price">
-                                                $122.00
-                                            </div>
-                                            <a class="cusmo-btn add-button" href="#">add to cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="span4">
-                                        <div class="product-item">
-                                            <img alt="" src="images/p3.jpg" />
-                                            <h1>burberry</h1>
-                                            <div class="tag-line">
-                                                <span>yellow diamond</span>
-                                                <span>toilet water spray</span>
-                                            </div>
-                                            <div class="price">
-                                                $120.00
-                                            </div>
-                                            <a class="cusmo-btn add-button" href="#">add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                 </div>
                             </div>
                         </div>
                     </div>
@@ -291,16 +178,8 @@
                 <div class="container">
                     <div class="copyright pull-left">
                         <p>
-                            <strong>© COSMETICO 2013</strong>. All rights reserved.<br>
-                            Designed by <a href="http://themeforest.net/user/bcube?ref=bcube">Michael Kowalski</a> | Coded by <a href="http://themeforest.net/user/leamino?ref=leamino">LeAmino</a>
+                            <strong>© Maquillage 2016</strong>
                         </p>
-                    </div>
-                    <div class="copyright-links pull-right">
-                        <ul class="inline">
-                            <li><a href="#">privacy policy</a></li>
-                            <li><a href="#">terms & conditions</a></li>
-                            <li><a href="#">site map</a></li>
-                        </ul>
                     </div>
                 </div>
             </section>

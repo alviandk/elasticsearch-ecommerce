@@ -390,7 +390,7 @@ margin: 70px 0 -27px;
 .section-home-products .controls-holder {
     text-align: center;
     margin: 40px 0 30px 0;
-    border-bottom: 4px solid #ed4559;
+
 
     padding-bottom: 20px;
 }
@@ -525,7 +525,7 @@ margin-right: auto!important;
     font-size: 18px;
     left: 26px;
     position: absolute;
-    top: 65px;
+    top: 15px;
 }
 .email-holder{
     position: relative;
@@ -657,8 +657,8 @@ margin-right: auto!important;
     color: #727272;
 }
 .section-copyright{
-    border-top: 4px solid #FF95A2;
-    margin: 40px 0 10px 0;
+    
+
     color: #FFFFFF;
     padding: 19px 0 0 0;
     line-height: 16px;
