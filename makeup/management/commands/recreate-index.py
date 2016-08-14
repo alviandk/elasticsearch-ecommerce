@@ -59,7 +59,7 @@ class Command(BaseCommand):
                         "filter": [
                           "synonyms_filt"
                         ],
-                        "tokenizer": "keyword"
+                        "tokenizer": "whitespace"
                     }
                  }
               }
