@@ -103,29 +103,7 @@
             <section class="section-two-columns">
                 <div class="container">
                     <div class="row-fluid">
-                        <div class="span3">
-                            <div class="sidebar">
-                                <div class="accordion-widget category-accordions">
-
-                                    <div class="accordion" >
-
-
-                                    </div>
-
-
-                                </div>
-
-
-
-                                <div class="accordion-widget filter-accordions">
-
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="span9 ">
+                        <div class="span12 ">
                             <div class="page-content">
                                 <div class="products-page-head">
                                     <h1>{{ product.name }}</h1>
@@ -146,6 +124,7 @@
                                         <div class="product-info-box">
                                             <div class="info-holder">
                                                 <h4>Product ID: {{ product.pk }}</h4>
+                                                <hr>
                                                 <h5>Category: {{ product.category.name }}</h5>
                                                 <p>
                                                     {% if product.description %}
@@ -156,14 +135,13 @@
                                                 </p>
                                             </div>
                                             <hr>
-
-                                            <hr>
                                             <div class="price-holder">
                                                 <div class="price">
                                                     <span>Rp {{ product.price }}</span>
 
                                                 </div>
                                             </div>
+                                            <hr>
                                         </div>
 
 

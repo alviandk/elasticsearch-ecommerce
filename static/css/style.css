@@ -1263,7 +1263,7 @@ float: right;
     float: none;
 }
 .product-info-box .price-holder{
-   margin: 17px 0 0;
+   margin: 0 0 0;
     display: inline-block;
 }
 .product-info-box .price{
