@@ -44,6 +44,11 @@
                  $(".ui-autocomplete").css("z-index", 1000);
              }
            });
+           $("#search-form").submit(function( event ) {
+
+               window.location.href = "{% url 'search-detail' %}" + "?term=" + $("#search").val();
+               event.preventDefault();
+           });
          });
          </script>
 
@@ -81,8 +86,9 @@
                         <div class="row-fluid">
                             <div class="span12">
                                 <div class="search-field-holder">
-                                    <form>
-                                        <input id="search" class="span12" type="text" placeholder="Type and hit enter" style="height: 46px;">
+                                    <form id="search-form">
+                                        <input id="search" class="span12" type="text" placeholder="Type then select or hit Enter" style="height: 46px;">
+
                                         <i class="icon-search"></i>
                                     </form>
                                 </div>
@@ -140,6 +146,7 @@
                                         <div class="product-info-box">
                                             <div class="info-holder">
                                                 <h4>Product ID: {{ product.pk }}</h4>
+                                                <h5>Category: {{ product.category.name }}</h5>
                                                 <p>
                                                     {% if product.description %}
                                                       {{ product.description }}
@@ -187,7 +194,7 @@
         </div>
 
 
-        <script src="{% static 'js/jquery-migrate-1.1.1.min.js'%}"></script>
+
         <script src="{% static 'js/jquery-migrate-1.1.1.min.js'%}"></script>
         <script src="{% static 'css/bootstrap/js/bootstrap.min.js'%}"></script>
 

@@ -41,8 +41,8 @@ def autocomplete_view(request):
                    }
                 }
         post_request = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
-        result = [{'id':'#', 'value':'Did You Mean?'}]
         resp = json.loads(post_request.content)
+        result = [{'id':resp['hits']['hits'][0]['_id'], 'value':'Did You Mean?'}]
     options = resp['hits']['hits']
 
     result_list = [{'id': i['_id'],
@@ -84,10 +84,10 @@ def search_result(request):
     data = [{'id': i['_id'],
           'name': i['_source']['name'],
           'brand': i['_source']['brand']['name'],
+          'category': i['_source']['category']['name'],
           'description': i['_source']['description'],
           'price': i['_source']['price'],
           'image': i['_source']['image'],} for i in options]
 
-    for product in data:
-        print product
+
     return render(request, 'sociolla/search-result.html', context={'data': data})

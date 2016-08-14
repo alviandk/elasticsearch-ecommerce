@@ -29,7 +29,7 @@
         $(function() {
           $("#search").autocomplete({
             source: "{% url 'autocomplete-view' %}",
-            minLength: 1,
+            minLength: 3,
             select: function(event, ui) {
               window.location.href = "{% url 'product-detail' %}" + "?product_id=" + ui.item.id;
             },
@@ -37,7 +37,19 @@
                 $(".ui-autocomplete").css("z-index", 1000);
             }
           });
+
+          $("#search-form").submit(function( event ) {
+
+              window.location.href = "{% url 'search-detail' %}" + "?term=" + $("#search").val();
+              event.preventDefault();
+          });
         });
+
+
+
+
+
+
         </script>
 
         <script type="text/javascript">
@@ -86,8 +98,8 @@
                         <div class="row-fluid">
                             <div>
                                 <div class="search-field-holder">
-                                    <form>
-                                        <input id="search" class="span12" type="text" placeholder="Type, select and hit enter" style="height: 46px;">
+                                    <form id="search-form">
+                                        <input id="search" class="span12" type="text" placeholder="Type then select or hit Enter" style="height: 46px;">
                                         <i class="icon-search"></i>
                                     </form>
                                 </div>
@@ -161,6 +173,7 @@
             </section>
 
         </div>
+
 
 
 
