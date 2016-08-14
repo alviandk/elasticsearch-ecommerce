@@ -1,6 +1,6 @@
 import json
 import requests
-from urllib import urlencode
+import urllib
 from copy import deepcopy
 from django.http import HttpResponse
 from django.conf import settings
@@ -66,19 +66,36 @@ def product_detail(request):
 def search_result(request):
     query = request.GET.get('term', '')
 
+
+
     data = {
                "query": {
                   "match": {
                      "_all": {
                         "query": query,
-                        "operator": "or",
-                        "analyzer": "filter_synonyms"
+                        "operator": "and"
                      }
                   }
                }
             }
     resp = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
     resp = json.loads(resp.content)
+    if resp['hits']['total'] == 0:
+        data = {
+                   "query": {
+                      "match": {
+                         "_all": {
+                            "query": query,
+                            "operator": "or",
+                            "analyzer": "filter_synonyms"
+                         }
+                      }
+                   }
+                }
+
+        
+        post_request = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
+        resp = json.loads(post_request.content)
     options = resp['hits']['hits']
 
     data = [{'id': i['_id'],
