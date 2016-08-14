@@ -1,0 +1,186 @@
+{% load staticfiles %}
+<html class=" webkit chrome linux js webkit chrome linux js"><head>
+
+        <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <title>Cosmetic - Modern Beauty Shop Template</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'css/raleway.css' %}" rel='stylesheet' type='text/css'>
+        <link href="{% static 'css/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+
+
+        <link href="{% static 'css/dataslider.css' %}" rel="stylesheet">
+
+
+
+        <!--[if IE 7]>
+
+        <link href="css/font-awesome/css/font-awesome-ie7.min.css" rel="stylesheet">
+
+        <![endif]-->
+
+        <link  rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link  rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        <link rel="stylesheet" href="{% static "jquery-ui.css" %}" type="text/css" media="all" />
+
+        <script src="{% static "jquery.min.js" %}" type="text/javascript"></script>
+        <script src="{% static "jquery-ui.min.js" %}" type="text/javascript"></script>
+        <script type="text/javascript">
+        $(function() {
+          $("#search").autocomplete({
+            source: "{% url 'autocomplete-view' %}",
+            minLength: 1,
+            select: function(event, ui) {
+              window.location.href = "{% url 'product-detail' %}" + "?product_id=" + ui.item.id;
+            },
+            open: function(event, ui) {
+                $(".ui-autocomplete").css("z-index", 1000);
+            }
+          });
+        });
+        </script>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        </script>
+
+
+
+    </head>
+    <body>
+
+
+
+        <div class="wrapper">
+            <section class="section-head">
+                <div class="container">
+                    <div class="row-fluid top-row">
+                        <div class="span4"></div>
+                        <div class="span4 logo-holder">
+                            <div class="logo">
+                                <span class="icon">
+                                    <img alt="" src={% static "images/logo.png"%} />
+                                </span>
+                                <span class="text" style="top: 40px;">
+                                    <a href="/">Maquill<span>age</span></a>
+                                </span>
+                            </div>
+						</div>
+					</div>
+
+
+                </div>
+
+                <div class="top-categories">
+                    <div class="container">
+                        <div class="row-fluid">
+                          <div class="span12">
+                                <div class="search-field-holder">
+                                    <form>
+                                        <input id="search" class="span12" type="text" placeholder="Type and hit enter" style="height: 46px;">
+                                        <i class="icon-search"></i>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+  </section>
+
+
+            <section class="section-two-columns">
+                <div class="container">
+                    <div class="row-fluid">
+
+                        <div class="span12">
+
+
+                            <div id="list-view" class="products-list products-holder active  tab-pane" style="display: block;">
+                              {% for product in data %}
+                                <div class="list-item">
+                                    <div class="row-fluid">
+                                        <div class="span4">
+                                            <div class="thumb">
+                                            <img alt="" src="{{ product.image }}">
+                                            </div>
+                                        </div>
+                                        <div class="span8">
+                                            <h1>{{ product.name }}</h1>
+                                            <div class="tag-line">
+                                                {{ product.brand }}
+                                            </div>
+                                            <div class="desc">
+                                              {% if product.description %}
+                                                {{ product.description }}
+                                              {% else %}
+                                                No description for this product.
+                                              {% endif %}
+                                            </div>
+                                            <div class="price">
+                                                <span>Rp {{ product.price }}</span>
+
+                                            </div>
+                                            <div class="buttons-holder">
+
+                                            <a class="cusmo-btn gray add-button" href="{% url 'product-detail' %}?product_id={{ product.id }}">details</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                {% endfor %}
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-copyright" style="margin-bottom: 0px;">
+                <div class="container">
+                    <div class="copyright pull-left">
+                        <p>
+                            <strong>� Maquillage 2016</strong>
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+        <script src="css/bootstrap/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="js/css_browser_selector.js"></script>
+
+        <script type="text/javascript" src="js/twitter-bootstrap-hover-dropdown.min.js"></script>
+        <script type="text/javascript" src="js/jquery.easing-1.3.js"></script>
+
+
+        <script type="text/javascript" src="js/bootstrap-slider.js"></script>
+
+        <script type="text/javascript" src="js/script.js"></script>
+
+
+
+
+
+
+</body></html>

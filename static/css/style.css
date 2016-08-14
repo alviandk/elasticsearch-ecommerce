@@ -318,7 +318,7 @@ h5,
     opacity: 1;
 }
 .products-holder.tab-pane{
-    display: none;
+    
     padding-bottom: 30px;
 }
 .products-holder.tab-pane.in{
@@ -657,7 +657,7 @@ margin-right: auto!important;
     color: #727272;
 }
 .section-copyright{
-    
+
 
     color: #FFFFFF;
     padding: 19px 0 0 0;

@@ -44,8 +44,7 @@ class Command(BaseCommand):
                        "filter": [
                           "lowercase",
                           "asciifolding",
-                          "nGram_filter",
-                          "synonyms_filt"
+                          "nGram_filter"
                        ]
                     },
                     "whitespace_analyzer": {
@@ -85,8 +84,9 @@ class Command(BaseCommand):
                             }
                         },
                         'name': {'type': 'string', 'index': 'not_analyzed'},
-                        'price': {'type': 'long'},
+                        'price': {'type': 'long', "include_in_all": False, "index": "no"},
                         'description': {'type': 'string'},
+                        'image': {'type': 'string', "include_in_all": False, "index": "no"},
 
                 }
              }

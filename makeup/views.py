@@ -19,28 +19,43 @@ def autocomplete_view(request):
                   "match": {
                      "_all": {
                         "query": query,
-                        "operator": "and",
-                        "fuzziness": 1,
-                        "analyzer": "filter_synonyms"
+                        "operator": "and"
                      }
                   }
                }
             }
-    resp = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
-    resp = json.loads(resp.content)
+    post_request = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
+    result = []
+    resp = json.loads(post_request.content)
+    if resp['hits']['total'] == 0:
+        data = {
+                   "size": 5,
+                   "query": {
+                      "match": {
+                         "_all": {
+                            "query": query,
+                            "operator": "or",
+                            "fuzziness": 1
+                         }
+                      }
+                   }
+                }
+        post_request = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
+        result = [{'id':'#', 'value':'Did You Mean?'}]
+        resp = json.loads(post_request.content)
     options = resp['hits']['hits']
-    #options = resp['name_complete'][0]['options']
-    #print query
-    #print options
 
-    data = json.dumps(
-        [{'id': i['_id'],
-          'value': '{} | in brand {} | in category {}'.format(i['_source']['name'],
-                                                              i['_source']['brand']['name'],
-                                                              i['_source']['category']['name'])} for i in options]
-    )
+    result_list = [{'id': i['_id'],
+             'value': '{} | in brand {} | in category {}'.format(i['_source']['name'],
+                                                          i['_source']['brand']['name'],
+                                                          i['_source']['category']['name'])} for i in options]
+    for item in result_list:
+        result.append(item)
+
+    data = json.dumps(result)
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
 
 def product_detail(request):
     product_id = request.GET.get('product_id')
@@ -49,114 +64,30 @@ def product_detail(request):
 
 
 def search_result(request):
-    product_id = request.GET.get('product_id')
-    product = Product.objects.get(pk=product_id)
-    return render(request, 'sociolla/product-details.html', context={'product': product})
+    query = request.GET.get('term', '')
 
-
-class HomePageView(TemplateView):
-    template_name = "index.html"
-    def get_context_data(self, **kwargs):
-        body = {
-            'aggs': {
-                'brand_name': {
-                    'terms': {
-                        'field': 'brand', 'size': 0
-                    }
-                },
-                'category__name': {
-                    'terms': {
-                        'field': 'category.name'
-                    }
-                },
-                'price': {
-                    'histogram': {
-                        'field': 'price',
-                        'interval': 2
-                    }
-                }
-            },
-            # 'query': {'match_all': {}}
-        }
-        es_query = self.gen_es_query(self.request)
-        body.update({'query': es_query})
-        search_result = client.search(index='django', doc_type='product', body=body)
-        context = super(HomePageView, self).get_context_data(**kwargs)
-        context['hits'] = [
-            self.convert_hit_to_template(c) for c in search_result['hits']['hits']
-        ]
-        context['aggregations'] = self.prepare_facet_data(
-            search_result['aggregations'],
-            self.request.GET
-        )
-        return context
-
-    def convert_hit_to_template(self, hit1):
-        hit = deepcopy(hit1)
-        almost_ready = hit['_source']
-        almost_ready['pk'] = hit['_id']
-        return almost_ready
-
-    def facet_url_args(self, url_args, field_name, field_value):
-        is_active = False
-        if url_args.get(field_name):
-            base_list = url_args[field_name].split(',')
-            if field_value in base_list:
-                del base_list[base_list.index(field_value)]
-                is_active = True
-            else:
-                base_list.append(field_value)
-            url_args[field_name] = ','.join(base_list)
-        else:
-            url_args[field_name] = field_value
-        return url_args, is_active
-
-    def prepare_facet_data(self, aggregations_dict, get_args):
-        resp = {}
-        for area in aggregations_dict.keys():
-            resp[area] = []
-            if area == 'age':
-                resp[area] = aggregations_dict[area]['buckets']
-                continue
-            for item in aggregations_dict[area]['buckets']:
-                url_args, is_active = self.facet_url_args(
-                    url_args=deepcopy(get_args.dict()),
-                    field_name=area,
-                    field_value=item['key']
-                )
-                resp[area].append({
-                    'url_args': urlencode(url_args),
-                    'name': item['key'],
-                    'count': item['doc_count'],
-                    'is_active': is_active
-                })
-        return resp
-
-    def gen_es_query(self, request):
-        req_dict = deepcopy(request.GET.dict())
-        if not req_dict:
-            return {'match_all': {}}
-        filters = []
-        for field_name in req_dict.keys():
-            if '__' in field_name:
-                filter_field_name = field_name.replace('__', '.')
-            else:
-                filter_field_name = field_name
-            for field_value in req_dict[field_name].split(','):
-                if not field_value:
-                    continue
-                filters.append(
-                    {
-                        'term': {filter_field_name: field_value},
-                    }
-                )
-        return {
-            'filtered': {
-                'query': {'match_all': {}},
-                'filter': {
-                    'bool': {
-                        'must': filters
-                    }
-                }
+    data = {
+               "query": {
+                  "match": {
+                     "_all": {
+                        "query": query,
+                        "operator": "or",
+                        "analyzer": "filter_synonyms"
+                     }
+                  }
+               }
             }
-        }
+    resp = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
+    resp = json.loads(resp.content)
+    options = resp['hits']['hits']
+
+    data = [{'id': i['_id'],
+          'name': i['_source']['name'],
+          'brand': i['_source']['brand']['name'],
+          'description': i['_source']['description'],
+          'price': i['_source']['price'],
+          'image': i['_source']['image'],} for i in options]
+
+    for product in data:
+        print product
+    return render(request, 'sociolla/search-result.html', context={'data': data})

@@ -101,6 +101,7 @@ class Product(models.Model):
                 'name': {'type': 'string', 'index': 'not_analyzed'},
                 'price': {'type': 'long'},
                 'description': {'type': 'string'},
+                'image': {'type': 'string', 'index': 'no'},
                 'name_complete': {
                     'type': 'completion',  # you have to make a method for completition for sure!
                     'analyzer': 'simple',
