@@ -151,7 +151,14 @@
 
 
                             </div>
-
+                            <div class="row-fluid">
+                              <div class="span6">
+                                   <p>Page {{page}} of {{total_page}}</p>
+                              </div>
+                              <div class="span6 pull-right" style="text-align:right">
+                                   <p>Go to Page: <input id="page" style="width:40px;"> <input id="go" type="button" value="Go" /></p>
+                              </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -184,6 +191,22 @@
         <script type="text/javascript" src="{% static 'js/bootstrap-slider.js'%}"></script>
 
         <script type="text/javascript" src="{% static 'js/script.js'%}"></script>
+        <script type="text/javascript">
+            $("#go").click(function(){
+                var page = $("#page").val();
+
+                if (page<={{total_page}}){
+                  var url = "{% url 'search-detail' %}?page="+page+"{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&{{ key }}={{ value }}{% endifnotequal %}{% endfor %}";
+                  window.location.href = url;
+                }else if (page>{{total_page}}){
+                  alert('Your input is out of range!');
+                }else{
+                  alert('Please input page number!');
+                }
+
+            });
+
+        </script>
 
 
 

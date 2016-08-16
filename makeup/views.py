@@ -65,10 +65,11 @@ def product_detail(request):
 
 def search_result(request):
     query = request.GET.get('term', '')
-
-
+    page = abs(int(request.GET.get('page', 1)))
 
     data = {
+               "size": 10,
+               "from": 10*(page-1),
                "query": {
                   "match": {
                      "_all": {
@@ -82,6 +83,8 @@ def search_result(request):
     resp = json.loads(resp.content)
     if resp['hits']['total'] == 0:
         data = {
+                   "size": 5,
+                   "from": 0,
                    "query": {
                       "match": {
                          "_all": {
@@ -93,7 +96,7 @@ def search_result(request):
                    }
                 }
 
-        
+
         post_request = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
         resp = json.loads(post_request.content)
     options = resp['hits']['hits']
@@ -106,5 +109,7 @@ def search_result(request):
           'price': i['_source']['price'],
           'image': i['_source']['image'],} for i in options]
 
+    total_page = resp['hits']['total']/10+1
 
-    return render(request, 'sociolla/search-result.html', context={'data': data})
+    return render(request, 'sociolla/search-result.html',
+                  context={'data': data, 'page': page, 'total_page': total_page})
