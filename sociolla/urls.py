@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^autocomplete/', autocomplete_view, name='autocomplete-view'),
     url(r'^product', product_detail, name='product-detail'),
     url(r'^search', search_result, name='search-detail'),
-    url(r'^$', TemplateView.as_view(template_name="sociolla/index.html")),
+    url(r'^$', TemplateView.as_view(template_name="sociolla/index.html"),
+        name='index'),
 ]

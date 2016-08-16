@@ -83,8 +83,8 @@ def search_result(request):
     resp = json.loads(resp.content)
     if resp['hits']['total'] == 0:
         data = {
-                   "size": 5,
-                   "from": 0,
+                   "size": 10,
+                   "from": 10*(page-1),
                    "query": {
                       "match": {
                          "_all": {
