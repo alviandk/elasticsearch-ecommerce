@@ -89,6 +89,31 @@ class Command(BaseCommand):
                         'image': {'type': 'string', "include_in_all": False, "index": "no"},
 
                 }
+             },
+             "product": {
+                "multi_match": {
+                   "analyzer": "filter_synonyms",
+                   "search_analyzer": "whitespace_analyzer"                   
+                },
+                "properties": {
+                        'category': {
+                            'type': 'object',
+                            'properties': {
+                                'name': {'type': 'string', 'index': 'not_analyzed'},
+                            }
+                        },
+                        'brand': {
+                            'type': 'object',
+                            'properties': {
+                                'name': {'type': 'string', 'index': 'not_analyzed'},
+                            }
+                        },
+                        'name': {'type': 'string', 'index': 'not_analyzed'},
+                        'price': {'type': 'long', "include_in_all": False, "index": "no"},
+                        'description': {'type': 'string'},
+                        'image': {'type': 'string', "include_in_all": False, "index": "no"},
+
+                }
              }
           }
         }

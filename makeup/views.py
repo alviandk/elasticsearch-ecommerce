@@ -71,13 +71,16 @@ def search_result(request):
                "size": 10,
                "from": 10*(page-1),
                "query": {
-                  "match": {
-                     "_all": {
-                        "query": query,
-                        "operator": "and"
-                     }
+               "filtered": {
+                      "query": {
+                          "multi_match": {
+                              "query": query,
+                              "fields": ["name"]
+
+                          }
+                      }
                   }
-               }
+              }
             }
     resp = requests.post('http://localhost:9200/django/_search?pretty=true', json.dumps(data))
     resp = json.loads(resp.content)
@@ -112,4 +115,5 @@ def search_result(request):
     total_page = resp['hits']['total']/10+1
 
     return render(request, 'sociolla/search-result.html',
-                  context={'data': data, 'page': page, 'total_page': total_page})
+                  context={'data': data, 'page': page, 'total_page': total_page,
+                           'query': query})
