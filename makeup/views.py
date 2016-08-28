@@ -92,8 +92,7 @@ def search_result(request):
                       "match": {
                          "_all": {
                             "query": query,
-                            "operator": "or",
-                            "analyzer": "filter_synonyms"
+                            "operator": "or",                            
                          }
                       }
                    }
