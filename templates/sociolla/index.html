@@ -6,7 +6,7 @@
 
         <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-        <title>Cosmetic - Modern Beauty Shop Template</title>
+        <title>Maquillage - Modern Beauty Shop Template</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
@@ -43,13 +43,12 @@
               window.location.href = "{% url 'search-detail' %}" + "?term=" + $("#search").val();
               event.preventDefault();
           });
+          $(".right-corder-container-button").hover(function() {
+			$(".long-text").addClass("show-long-text");   
+		  }, function () {
+			$(".long-text").removeClass("show-long-text");
+		  });
         });
-
-
-
-
-
-
         </script>
 
         <script type="text/javascript">
@@ -158,8 +157,32 @@
 
         </div>
 
+		<div class="right-corder-container">
+			<button class="btn-lg right-corder-container-button" data-toggle="modal" data-target="#myModal">
+				<span class="short-text">?</span>
+				<span class="long-text">Help</span>
+			</button>
+		</div>
 
+		<!-- Modal -->
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
 
+			<!-- Modal content-->
+			<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Modal Header</h4>
+			</div>
+			<div class="modal-body">
+				<p>Some text in the modal.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+			</div>
+		</div>
+		</div>
 
         <script src="{% static 'js/jquery-migrate-1.1.1.min.js'%}"></script>
         <script src="{% static 'css/bootstrap/js/bootstrap.min.js'%}"></script>
