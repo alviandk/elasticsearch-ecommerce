@@ -157,10 +157,10 @@
 
                             </div>
                             <div class="row-fluid">
-                              <div class="span6">
+                              <div class="span6"style="color: rgb(133, 142, 151);">
                                    <p>Page {{page}} of {{total_page}}</p>
                               </div>
-                              <div class="span6 pull-right" style="text-align:right">
+                              <div class="span6 pull-right" style="text-align: right; color: rgb(133, 142, 151);">
                                    <p>Go to Page: <input id="page" style="width:40px;"> <input id="go" type="button" value="Go" /></p>
                               </div>
                             </div>
@@ -195,12 +195,78 @@
 
 			<!-- Modal content-->
 			<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header" style="background-color: rgb(237, 69, 89);">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Modal Header</h4>
+				<h4 class="modal-title" style="color: white;">Help</h4>
 			</div>
-			<div class="modal-body">
-				<p>Some text in the modal.</p>
+			<div class="modal-body" style="background-color: rgb(255, 149, 162);">
+				<h2>Langkah Pencarian Produk</h2>
+				<p>Berikut ini langkah-langkah pencarian produk menggunakan mesin pencari.</p>
+				<ul id='timeline'>
+					<li class='work'>
+						<input class='radio' id='work5' name='works' type='radio' checked>
+							<div class="relative">
+								<label for='work5'>Fitur Autocomplete</label>
+								<span class='date'>Langkah Ke-1</span>
+								<span class='circle'></span>
+							</div>
+							<div class='content'>
+								<p>Cukup ketikan tiga huruf dari produk yang dicari, akan diberikan saran produk yang sesuai dengan kata yang diketikan</p>
+							</div>
+					</li>
+					<li class='work'>
+						<input class='radio' id='work4' name='works' type='radio'>
+							<div class="relative">
+								<label for='work4'>Fitur Autocorrect</label>
+								<span class='date'>Langkah Ke-2</span>
+								<span class='circle'></span>
+							</div>
+							<div class='content'>
+								<p>
+									Jika anda tidak sengaja salah mengeja nama produk, maka akan ditampilkan saran produk yang mendekati kata yang dikoreksi
+								</p>
+							</div>
+					</li>
+					<li class='work'>
+						<input class='radio' id='work3' name='works' type='radio'>
+							<div class="relative">
+								<label for='work3'>Tidak Ada Produk yang Dicari</label>
+								<span class='date'>Langkah Ke-3</span>
+								<span class='circle'></span>
+							</div>
+							<div class='content'>
+								<p>
+									Jika masih belum mendapat produk yang dicari dalam fitur Autocorrect, tekan tombol Enter untuk melihat hasil pencarian selengkapnya.
+								</p>
+							</div>
+					</li>
+					<li class='work'>
+						<input class='radio' id='work2' name='works' type='radio'>
+							<div class="relative">
+								<label for='work2'>Mencari Produk yang Disarankan</label>
+								<span class='date'>Langkah Ke-4</span>
+								<span class='circle'></span>
+							</div>
+							<div class='content'>
+								<p>
+									Ketika tombol Enter ditekan, akan ditampilkan hasil pencarian selengkapnya. Pada setiap hasil pencarian diberikan deskripsi produk, sehingga memudahkan menemukan alternatif produk jika tidak ada produk tujuan.
+								</p>
+							</div>
+					</li>
+					<li class='work'>
+						<input class='radio' id='work1' name='works' type='radio'>
+							<div class="relative">
+								<label for='work1'>Melihat Detail Lengkap Hasil Pencarian</label>
+								<span class='date'>Langkah Ke-5</span>
+								<span class='circle'></span>
+							</div>
+						<div class='content'>
+							<p>
+								Untuk melihat penjelasan setiap produk lebih lengkap, tekan tombol Detail
+							</p>
+						</div>
+					</li>
+				</ul>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
