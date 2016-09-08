@@ -2012,6 +2012,7 @@ h2 {
   margin-top: -17px;
 }
 .content p {
+  font-size: 0.9em;
   max-height: 0;
   color: transparent;
   text-align: justify;
@@ -2021,7 +2022,7 @@ h2 {
 }
 
 label {
-  font-size: 1.3em;
+  font-size: 1.07em;
   position: absolute;
   z-index: 100;
   cursor: pointer;
@@ -2092,7 +2093,7 @@ label {
     margin-left: -17px;
   }
   .content:after {
-    border-bottom-color: #48b379;
+    border-bottom-color: #ed4559;
     border-width: 20px;
     top: -20px;
     left: 50px;
