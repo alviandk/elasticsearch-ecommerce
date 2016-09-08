@@ -44,7 +44,8 @@ class Command(BaseCommand):
                        "filter": [
                           "lowercase",
                           "asciifolding",
-                          "nGram_filter"
+                          "nGram_filter",
+                          "synonyms_filt"
                        ]
                     },
                     "whitespace_analyzer": {
